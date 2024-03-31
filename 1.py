@@ -7,7 +7,7 @@ ops = {
     '*' : operator.mul,
     '/' : operator.truediv,
     '%' : operator.mod,
-    '^' : operator.xor,
+    '^' : operator.pow,
 }
 
 def move(array: tuple, moves: str):
@@ -38,6 +38,6 @@ def game_any(array: tuple, fin_value: int, fin_pos: str, moves: str, player = 1,
         return any(game_any(i, fin_value, fin_pos, moves, player, step + 1) for i in move(array, moves))
     return all(game_any(i, fin_value, fin_pos, moves, player, step + 1) for i in move(array, moves))
 
-for i in range(1, 43):
-    if game_sum(tuple([5, i]), 49, '4', '+1 *3', 1):
+for i in range(2, 43):
+    if game_any(tuple([3, i]), 49, '2', '+1 ^3', 1):
         print(i)
