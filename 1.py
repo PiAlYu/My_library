@@ -69,5 +69,5 @@ def game_all(array: tuple, fin_value: str, fin_pos: str, moves: str, player = 1,
     return all(game_all(i, fin_value, fin_pos, moves, player, step + 1) for i in move(array, moves))
 
 for i in range(1, 37):
-    if game_all_sum(tuple([i]), 38, '4', '+1 +2 *2', 1):
+    if game_all_sum(tuple([i]), '>=38', '4', '+1 +2 *2', 1):
         print(i)
