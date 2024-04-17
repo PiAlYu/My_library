@@ -70,6 +70,21 @@ def game_all(array: tuple, fin_value: str, fin_pos: str, moves: str, player = 1,
         return any(game_all(i, fin_value, fin_pos, moves, player, step + 1) for i in move(array, moves))
     return all(game_all(i, fin_value, fin_pos, moves, player, step + 1) for i in move(array, moves))
 
-for i in range(1, 65):
-    if game_all(tuple([i]), '>=65', '35', '+1 +2 *3', 2):
+
+def game(type: str, array, fin_value: str, fin_pos, moves: str, player = 1, step = 1):
+    array, fin_pos, player = tuple(array), str(fin_pos), int(player)
+    if len(fin_pos) == 1:
+        if type == 'all': return game_all(array, fin_value, fin_pos, moves, player, step)
+        if type == 'any': return game_any(array, fin_value, fin_pos, moves, player, step)
+        if type == 'all_sum': return game_all_sum(array, fin_value, fin_pos, moves, player, step)
+        if type == 'any_sum': return game_any_sum(array, fin_value, fin_pos, moves, player, step)
+    else:
+        if type == 'all': return game_all(array, fin_value, fin_pos, moves, player, step) and not(game_all(array, fin_value, fin_pos[0], moves, player, step))
+        if type == 'any': return game_any(array, fin_value, fin_pos, moves, player, step) and not(game_any(array, fin_value, fin_pos[0], moves, player, step))
+        if type == 'all_sum': return game_all_sum(array, fin_value, fin_pos, moves, player, step) and not(game_all_sum(array, fin_value, fin_pos[0], moves, player, step))
+        if type == 'any_sum': return game_any_sum(array, fin_value, fin_pos, moves, player, step) and not(game_any_sum(array, fin_value, fin_pos[0], moves, player, step))
+
+
+for i in range(1, 71):
+    if game('any_sum', [6, i], '>=88', 3, '+1 *3', 2):
         print(i)
